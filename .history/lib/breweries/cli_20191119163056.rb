@@ -22,29 +22,19 @@ require 'pry'
 #   end
 # end
 
-# def brew
-#   puts "What brewery would you like to find?"
-#   brew_input = gets.chomp.downcase.gsub(/\s+/, "") # Gets, downcases and removes space in user input
-#   brew_link = 'http://prost.herokuapp.com/api/v1/brewery/' + brew_input # Concatenates user input brewery to end link
-#   response = HTTParty.get(brew_link)
-#   response.each do |k, v|
-#     puts "#{k} is #{v}"
-#   end
-#   puts response
-# end
+def brew
+  puts "What brewery would you like to find?"
+  brew_input = gets.chomp.downcase.gsub(/\s+/, "") # Gets, downcases and removes space in user input
+  brew_link = 'http://prost.herokuapp.com/api/v1/brewery/' + brew_input # Concatenates user input brewery to end link
+  response = HTTParty.get(brew_link)
+  response.each do |k, v|
+    puts "#{k} is #{v}"
+  end
+  puts response
+end
 
 def brew_from_open
   puts "What brewery would you like to find?"
-  brew_in = gets.chomp.downcase.gsub(/\s+/, "_") # Gets, downcases and removes space in user input, joins with underscore
+  brew_in = gets.chomp.downcase.gsub(/\s+/, "") # Gets, downcases and removes space in user input
   link = 'https://api.openbrewerydb.org/breweries?by_name=' + brew_in # Concatenates user input brewery to end link
-  response = HTTParty.get(link)
-  # binding.pry
-
-  if response.length > 1
-    puts response
-  else
-    puts "Sorry, no information found."
-  end
-end
-
-brew_from_open
+  response = HTTParty.get(brew_link)

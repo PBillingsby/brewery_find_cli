@@ -38,7 +38,7 @@ def brew_from_open
   brew_in = gets.chomp.downcase.gsub(/\s+/, "_") # Gets, downcases and removes space in user input, joins with underscore
   link = 'https://api.openbrewerydb.org/breweries?by_name=' + brew_in # Concatenates user input brewery to end link
   response = HTTParty.get(link)
-  # binding.pry
+  binding.pry
 
   if response.length > 1
     puts response

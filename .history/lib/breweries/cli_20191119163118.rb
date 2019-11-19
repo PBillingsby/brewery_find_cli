@@ -35,16 +35,10 @@ require 'pry'
 
 def brew_from_open
   puts "What brewery would you like to find?"
-  brew_in = gets.chomp.downcase.gsub(/\s+/, "_") # Gets, downcases and removes space in user input, joins with underscore
+  brew_in = gets.chomp.downcase.gsub(/\s+/, "") # Gets, downcases and removes space in user input
   link = 'https://api.openbrewerydb.org/breweries?by_name=' + brew_in # Concatenates user input brewery to end link
   response = HTTParty.get(link)
-  # binding.pry
-
-  if response.length > 1
-    puts response
-  else
-    puts "Sorry, no information found."
-  end
+  puts response
 end
 
 brew_from_open
