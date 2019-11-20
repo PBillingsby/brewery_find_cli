@@ -6,4 +6,5 @@ class CLI
     @input = gets.strip.downcase
     BreweryAPI.brewery_by_state(@input)
   end
+
 end
