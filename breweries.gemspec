@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["philbillingsby@gmail.com"]
 
   spec.summary       = %q{TODO: Gem for finding information on breweries in the United States}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/PBillingsby/brewery_find_cli.git"
   spec.license       = "MIT"
 
   spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
