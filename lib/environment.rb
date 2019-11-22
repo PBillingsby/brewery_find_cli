@@ -1,4 +1,4 @@
-require 'httparty'
+require 'httparty' # Load order
 require 'pry'
 require_relative "breweries/version"
 require_relative "breweries/cli"

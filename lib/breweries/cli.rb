@@ -1,9 +1,27 @@
-class CLI
-
+class CLI # CONTROLLER
+ 
   def start
     puts "Welcome...."
     puts "Type in a state to list breweries: "
     @input = gets.strip.downcase
     BreweryAPI.brewery_by_state(@input)
+    list_brewery_names # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
+    # puts "Type number for more brewery information"
+    # @brew_select = gets.strip
+    # puts Brewery.all.name[@brew_select.to_i]
+  end
+
+  def list_brewery_names
+    Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
+    puts "Type number to get more information on brewery"
+    puts "Pressing enter will open to an external brewery website."
+    brew_input = gets.chomp.to_i
+    brew_selection = Brewery.all[brew_input - 1]
+    brew_selection
+    # new.each do |key, value|
+    #   puts "Value: #{value}"
+    # end
+    binding.pry
+    system("open", Brewery.all[brew_input - 1].website_url)
   end
 end

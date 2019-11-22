@@ -5,4 +5,3 @@
 require_relative '../lib/environment'
 
 CLI.new.start
-binding.pry

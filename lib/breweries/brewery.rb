@@ -15,5 +15,7 @@ class Brewery
     @@all
   end
 
-
+  def select_by_name
+    
+  end
 end
