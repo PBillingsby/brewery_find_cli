@@ -14,8 +14,5 @@ class Brewery
   def self.all
     @@all
   end
-
-  def select_by_name
-    
-  end
+  
 end
