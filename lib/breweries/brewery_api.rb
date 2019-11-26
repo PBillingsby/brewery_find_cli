@@ -18,4 +18,14 @@ class BreweryAPI
     end
     response
   end
+
+  def self.brewery_by_name(name_input)
+    brew_name_input = name_input.downcase.gsub(/\s+/, "_")
+    name_link = 'https://api.openbrewerydb.org/breweries?by_name=' + brew_name_input
+    name_response = HTTParty.get(name_link)
+    name_response.each do |hash|
+      Brewery.new(hash)
+    end
+    name_response
+  end
 end

@@ -2,18 +2,37 @@ class CLI # CONTROLLER
  
   def start
     puts "Welcome...."
-    puts "Type in a state to list breweries: "
+    puts "Do you want to list brewery by state or find by name? Type 'list' or 'find'"
     @input = gets.strip.downcase
-    BreweryAPI.brewery_by_state(@input)
+    list_or_find
+    
+    # list_brewery_names
+    # @@states.each do |k, v|
+    #   if @input == k.downcase || @input.upcase == v
+    #     BreweryAPI.brewery_by_state(@input)
+    #     list_brewery_names
+    #   end
+    # end
+
     # puts "Do you want to list by state or by name?"
     # gets.chomp
-    list_brewery_names # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
+     # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
+  end
+  
+  def list_or_find
+    if @input == 'list'
+      BreweryAPI.brewery_by_state(@input)
+      list_brewery_names
+    elsif @input == 'find'
+      BreweryAPI.brewery_by_name(@input)
+    else 
+      "error"
+    end
   end
 
   def list_brewery_names
-    # Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}."}
+    Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
     puts "Type number to get more information on brewery"
-    # puts "Pressing enter will open to an external brewery website."
     
     brew_input = gets.strip.to_i
     brew_selection = Brewery.all[brew_input - 1] # Takes user input to index number minus 1 to account for indexing starting at 0
@@ -33,7 +52,7 @@ class CLI # CONTROLLER
     end
   end
 
-  @states = {
+  @@states = {
       "Alabama" => "AL",
       "Alaska" => "AK",
       "Arizona" => "AZ",
