@@ -5,10 +5,9 @@ class CLI # CONTROLLER
     puts "Type in a state to list breweries: "
     @input = gets.strip.downcase
     BreweryAPI.brewery_by_state(@input)
+    # puts "Do you want to list by state or by name?"
+    # gets.chomp
     list_brewery_names # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
-    # puts "Type number for more brewery information"
-    # @brew_select = gets.strip
-    # puts Brewery.all.name[@brew_select.to_i]
   end
 
   def list_brewery_names
@@ -18,10 +17,11 @@ class CLI # CONTROLLER
     brew_input = gets.chomp.to_i
     brew_selection = Brewery.all[brew_input - 1]
     brew_selection
-    # new.each do |key, value|
-    #   puts "Value: #{value}"
-    # end
-    binding.pry
-    system("open", Brewery.all[brew_input - 1].website_url)
+    sleep(0.5)
+    system("open", Brewery.all[brew_input - 1].website_url) # Opens external link to selected brewery
   end
+
+  # def list_brewery_by_type
+  #   Brewery.all.list_brewery_by_type
+  # end
 end

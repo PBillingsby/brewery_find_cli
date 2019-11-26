@@ -18,6 +18,4 @@ class BreweryAPI
     end
     response
   end
-
-  
 end
