@@ -1,7 +1,12 @@
 class CLI # CONTROLLER
  
   def start
-    puts "Welcome...."
+    puts " -----------------------"
+    puts "|     ** WELCOME **     |"
+    puts "|                       |"
+    puts "|  TO THE BREWERY FIND  |"
+    puts "|          CLI          |"
+    puts " -----------------------"
     puts "Do you want to list brewery by state or find by name? Type 'list' or 'find'"
     @input = gets.strip.downcase
     list_or_find
@@ -33,11 +38,11 @@ class CLI # CONTROLLER
     puts "#{brew_selection.name} is a #{brew_selection.brewery_type} located in #{brew_selection.city}, #{brew_selection.state}"
     
     puts "Do you wish to visit their website? Type 'yes' or 'exit'"
-    web_input = gets.strip
-    if web_input == 'yes'
+    list_web_input = gets.strip
+    if list_web_input == 'yes'
       sleep(0.5)
       system("open", Brewery.all[brew_input - 1].website_url) # Opens external link to selected brewery
-    elsif web_input == 'exit'
+    elsif list_web_input == 'exit'
       Brewery.all.clear # Without this, the start method added whole list again incrementing count by 20
       start
     else
@@ -46,9 +51,22 @@ class CLI # CONTROLLER
   end
 
   def list_brewery_by_name
-    brew = Brewery.all.each.with_index do |brewery|
-      if @user_choice === brewery.name
-        puts brew.name
+    @found_brewery = []
+    @found_brewery << Brewery.all.first
+    @found_brewery.collect do |key| 
+      puts "#{key.name} is located in #{key.city}"
+      puts "Do you wish to get more information on #{key.name}? Type 'yes' or 'no'"
+      find_web_input = gets.strip
+      if find_web_input == 'yes'
+        sleep(0.5)
+        system("open", key.website_url)
+        start
+      elsif find_web_input == 'no'
+        puts "Taking you to main menu"
+        start
+      else
+        puts "Please type yes or no"
+        list_brewery_by_name
       end
     end
   end #MUST MAKE WORK
