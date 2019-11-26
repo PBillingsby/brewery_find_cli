@@ -17,7 +17,7 @@ class CLI # CONTROLLER
       list_brewery_names
     elsif @input == 'find'
       BreweryAPI.brewery_by_name(@user_choice)
-      # Brewery.all.find
+      list_brewery_by_name
     else 
       "error"
     end
@@ -44,6 +44,11 @@ class CLI # CONTROLLER
       puts "Please type either 'yes' or 'exit'"
     end
   end
+
+  # def list_brewery_by_name
+  #   Brewery.all.select {|brewery| brewery.name == @user_choice}
+
+  # end MUST MAKE WORK
 
   @@states = {
       "Alabama" => "AL",
