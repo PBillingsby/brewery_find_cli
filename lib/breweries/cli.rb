@@ -5,26 +5,19 @@ class CLI # CONTROLLER
     puts "Do you want to list brewery by state or find by name? Type 'list' or 'find'"
     @input = gets.strip.downcase
     list_or_find
-    
-    # list_brewery_names
-    # @@states.each do |k, v|
-    #   if @input == k.downcase || @input.upcase == v
-    #     BreweryAPI.brewery_by_state(@input)
-    #     list_brewery_names
-    #   end
-    # end
-
-    # puts "Do you want to list by state or by name?"
-    # gets.chomp
+  
      # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
   end
   
   def list_or_find
+    puts "Enter name of state or brewery"
+    @user_choice = gets.strip.downcase
     if @input == 'list'
-      BreweryAPI.brewery_by_state(@input)
+      BreweryAPI.brewery_by_state(@user_choice)
       list_brewery_names
     elsif @input == 'find'
-      BreweryAPI.brewery_by_name(@input)
+      BreweryAPI.brewery_by_name(@user_choice)
+      # Brewery.all.find
     else 
       "error"
     end
