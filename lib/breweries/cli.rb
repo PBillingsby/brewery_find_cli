@@ -45,10 +45,13 @@ class CLI # CONTROLLER
     end
   end
 
-  # def list_brewery_by_name
-  #   Brewery.all.select {|brewery| brewery.name == @user_choice}
-
-  # end MUST MAKE WORK
+  def list_brewery_by_name
+    brew = Brewery.all.each.with_index do |brewery|
+      if @user_choice === brewery.name
+        puts brew.name
+      end
+    end
+  end #MUST MAKE WORK
 
   @@states = {
       "Alabama" => "AL",
