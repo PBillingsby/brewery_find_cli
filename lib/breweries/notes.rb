@@ -51,3 +51,7 @@
   #       @input = key
   #     end
   #   end
+
+  # if brew_input == 'next'
+    #   BreweryAPI.next_page
+    # end

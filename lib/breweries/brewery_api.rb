@@ -11,12 +11,19 @@ class BreweryAPI
   end
 
   def self.brewery_by_name(name_input)
-    brew_name_input = name_input.gsub(/\s+/, "_")
-    name_link = 'https://api.openbrewerydb.org/breweries?by_name=' + brew_name_input
+    @brew_name_input = name_input.gsub(/\s+/, "_")
+    name_link = 'https://api.openbrewerydb.org/breweries?by_name=' + @brew_name_input
     name_response = HTTParty.get(name_link)
     name_response.each do |hash|
       Brewery.new(hash)
     end
     name_response
+  end
+
+  def self.next_page
+    page_number = 1
+    new_page = '&page=' + page_number
+    next_page = 'https://api.openbrewerydb.org/breweries?by_name=' + @brew_name_input #+ new_page.to_s
+    next_response = HTTParty.get(name_link)
   end
 end
