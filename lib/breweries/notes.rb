@@ -55,3 +55,37 @@
   # if brew_input == 'next'
     #   BreweryAPI.next_page
     # end
+
+    # if @user_choice == 'list'
+    #   BreweryAPI.brewery_by_state(@user_choice)
+    #   list_brewery_names
+    # elsif @user_choice == 'find'
+    #   BreweryAPI.brewery_by_name(@user_choice)
+    #   list_brewery_by_name
+    #   Brewery.all.clear
+    # end
+
+    #COMMENTING THIS METHOD OUT UNTIL I CAN FINISH FIRST METHOD.
+  # def list_brewery_by_name  
+  #   @found_brewery = []
+  #   @found_brewery << Brewery.all.first
+  #   @found_brewery.collect do |key| 
+  #     puts "#{key.name} is located in #{key.city}."
+  #     puts "Do you wish to visit the #{key.name} website? Type 'yes' or 'no'"
+  #     find_web_input = gets.strip
+      
+  #     if find_web_input == 'yes'
+  #       sleep(0.5)
+  #       system("open", key.website_url)
+  #       start
+  #     elsif find_web_input == 'no'
+  #       puts "Taking you to main menu"
+  #       Brewery.all.clear
+  #       start
+  #     else
+  #       puts "Please type yes or no"
+  #       list_brewery_by_name
+  #     end
+  #   end
+  #   # Brewery.all.clear
+  # end #MUST MAKE WORK
