@@ -3,6 +3,7 @@ class Brewery
   @@all = []
 
   def initialize(api_hash)
+    # api_hash.each {|k, v| self.send("#{k}=", v)}  ------- Figure this out!
     @name = api_hash["name"]
     @brewery_type = api_hash["brewery_type"]
     @city = api_hash["city"]
