@@ -14,6 +14,9 @@ class CLI # CONTROLLER
   def menu
     puts "Type the state you would like to browse breweries in:"
     @input = gets.strip.downcase.gsub(/\s+/, "_")
+
+    # NEXT PAGE VARIABLE TO WORK ON! 
+    # next_page = 'https://api.openbrewerydb.org/breweries?by_state=' + @input + '&page=2'
     correct_state = @@states.select{|state| state == @input} 
     if correct_state.empty?
       puts "Please type full state name"
@@ -31,15 +34,15 @@ class CLI # CONTROLLER
   def list_brewery_names
     
     Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
-    
     puts "Type number to get more information on brewery or 'exit' to start again"
-    brew_input = gets.strip.downcase
-    binding.pry
+    brew_input = gets.strip.downcase.to_i
     if brew_input.class == Integer && brew_input <= 20
-      brew_selection = Brewery.all[brew_input.to_i - 1] # Takes user input to index number minus 1 to account for indexing starting at 0
+      binding.pry
+      brew_selection = Brewery.all[brew_input - 1] # Takes user input to index number minus 1 to account for indexing starting at 0
       puts "You have chosen #{brew_selection.name}, a #{brew_selection.brewery_type} located in #{brew_selection.city}, #{brew_selection.state}."
       puts "Do you wish to visit their website? 'y/n'"
       list_web_input = gets.strip
+
       if list_web_input == 'y'
         sleep(0.5)
         system("open", Brewery.all[brew_input - 1].website_url) # Opens external link to selected brewery
@@ -47,6 +50,7 @@ class CLI # CONTROLLER
         Brewery.clear_all
         start
       end
+
     end
   end
   @@states = ["alaska", # Changed states to match @input and remove one line of code
