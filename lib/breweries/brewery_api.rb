@@ -19,11 +19,11 @@ class BreweryAPI
     end
     name_response
   end
-
-  def self.next_page
-    page_number = 1
-    new_page = '&page=' + page_number
-    next_page = 'https://api.openbrewerydb.org/breweries?by_name=' + @brew_name_input #+ new_page.to_s
-    next_response = HTTParty.get(name_link)
-  end
+  # POSSIBLE CLASS METHOD FOR SHOWING 20 MORE BREWERY RESULTS.
+  # def self.next_page
+  #   page_number = 1
+  #   new_page = '&page=' + page_number
+  #   next_page = 'https://api.openbrewerydb.org/breweries?by_name=' + @brew_name_input #+ new_page.to_s
+  #   next_response = HTTParty.get(name_link)
+  # end
 end
