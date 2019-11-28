@@ -56,14 +56,14 @@
     #   BreweryAPI.next_page
     # end
 
-    # if @user_choice == 'list'
-    #   BreweryAPI.brewery_by_state(@user_choice)
-    #   list_brewery_names
-    # elsif @user_choice == 'find'
-    #   BreweryAPI.brewery_by_name(@user_choice)
-    #   list_brewery_by_name
-    #   Brewery.all.clear
-    # end
+    if @user_choice == 'list'
+      BreweryAPI.brewery_by_state(@user_choice)
+      list_brewery_names
+    elsif @user_choice == 'find'
+      BreweryAPI.brewery_by_name(@user_choice)
+      list_brewery_by_name
+      Brewery.all.clear
+    end
 
     #COMMENTING THIS METHOD OUT UNTIL I CAN FINISH FIRST METHOD.
   # def list_brewery_by_name  
@@ -89,3 +89,14 @@
   #   end
   #   # Brewery.all.clear
   # end #MUST MAKE WORK
+
+
+  # if list_options == 'next'
+      #   next_page
+      # end
+
+  # def next_page
+  #   @page_num = 2  
+  #   BreweryAPI.brewery_by_state(@input + '&page=' + @page_num.to_s) # Concatenates the user input with page string and page number.
+  #   list_brewery_names
+  # end
