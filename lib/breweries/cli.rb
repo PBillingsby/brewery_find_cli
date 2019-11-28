@@ -5,7 +5,7 @@ class CLI # CONTROLLER
     puts "|     ** WELCOME **     |"
     puts "|                       |"
     puts "| TO THE BREWERY FINDER |"
-    puts "|          CLI          |"
+    puts "|          APP          |"
     puts " ----------------------- "
     menu
      # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
@@ -32,27 +32,33 @@ class CLI # CONTROLLER
   end
 
   def list_brewery_names
-    
     Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
     puts "Type number to get more information on brewery or 'exit' to start again"
     brew_input = gets.strip.downcase.to_i
     if brew_input.class == Integer && brew_input <= 20
-      binding.pry
       brew_selection = Brewery.all[brew_input - 1] # Takes user input to index number minus 1 to account for indexing starting at 0
-      puts "You have chosen #{brew_selection.name}, a #{brew_selection.brewery_type} located in #{brew_selection.city}, #{brew_selection.state}."
+      puts "You have chosen #{brew_selection.name}, a #{brew_selection.brewery_type} located at #{brew_selection.street} in #{brew_selection.city}, #{brew_selection.state}. "
       puts "Do you wish to visit their website? 'y/n'"
       list_web_input = gets.strip
+    end
 
-      if list_web_input == 'y'
-        sleep(0.5)
-        system("open", Brewery.all[brew_input - 1].website_url) # Opens external link to selected brewery
-      else
-        Brewery.clear_all
-        start
-      end
-
+    if brew_selection.website_url == "" && list_web_input == 'y' # If no link to brewery, restart app
+      puts "No link to brewery website. Try again."
+      Brewery.clear_all
+      sleep(1)
+      start
+    elsif list_web_input == 'y'
+      puts "Redirecting you now."
+      sleep(0.5) # Waits half a second to open link.
+      system("open", Brewery.all[brew_input - 1].website_url) # Opens external link to selected brewery
+    else
+      Brewery.clear_all
+      start
     end
   end
+
+
+
   @@states = ["alaska", # Changed states to match @input and remove one line of code
   "alabama",
   "arkansas",
