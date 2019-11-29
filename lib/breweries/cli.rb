@@ -10,6 +10,8 @@ class CLI # CONTROLLER
     menu
      # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
   end
+  
+  # Menu gives options to either search by state, by name, or to exit program.
   def menu
     puts "Do you wish to list brewery by state or by name?"
     puts "Type 'list', 'name' or 'exit' to exit:"
@@ -18,19 +20,18 @@ class CLI # CONTROLLER
     when 'list'
       list_menu
     when 'name'
-      list_name
+      list_brewery_by_name
     when 'exit'
       exit
+    else
+      start
     end
   end
 
-  def list_name
+  def list_brewery_by_name  
     puts "Type brewery name:"
     @name_input = gets.strip
     BreweryAPI.brewery_by_name(@name_input)
-    list_brewery_by_name
-  end
-  def list_brewery_by_name  
     @found_brewery = []
     @found_brewery << Brewery.all.first
     @found_brewery.collect do |key| 
@@ -66,38 +67,27 @@ class CLI # CONTROLLER
       puts "Please type full state name"
       list_menu
     else
-      list
+      list_brewery_names
     end
   end
 
-  def list
-    BreweryAPI.brewery_by_state(@list_input)
-    list_brewery_names
-  end
-
   def list_brewery_names
+    BreweryAPI.brewery_by_state(@list_input)
     Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
     puts "Type number to get more information on brewery, 'exit' to start again"
     list_options = gets.strip.downcase
-    brew_input = list_options.to_i
-    brew_selection = Brewery.all[brew_input - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
-    if brew_selection == nil
+    
+    brew_selection = Brewery.all[list_options.to_i - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
+    if list_options.class != Integer
       puts "Brewery not in list."
-      puts "Do you wish to try again or return to start? Type 'list' or 'start'"
-      list_or_menu = gets.strip
-      case list_or_menu
-      when 'list'
-        list_brewery_names
-      when 'start'
-        start
-      end
-    elsif list_options == 'exit'
+      puts "Please try again."
+      Brewery.clear_all
       start
-    elsif brew_input <= 20
+    elsif list_options.class == Integer && brew_selection <= 20
       puts "You have chosen #{brew_selection.name}, a #{brew_selection.brewery_type} located at #{brew_selection.street} in #{brew_selection.city}, #{brew_selection.state}. "
       puts "Do you wish to visit their website? 'y/n'"
       list_web_input = gets.strip
-    else
+    elsif list_options == 'exit'
       start
     end
 
