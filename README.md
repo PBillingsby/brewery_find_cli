@@ -1,8 +1,10 @@
 # Breweries
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/breweries`. To experiment with that code, run `bin/console` for an interactive prompt.
+BreweryFinder will assist you in finding breweries with delicious beer in every state in the United States.
 
-TODO: Delete this and the text above, and describe your gem
+BreweryFinder will give you the option to list breweries by state, or list brewery by name. In finding a certain brewery you will also have the option to list surrounding breweries in the same city as your chosen one.
+
+For additional information, please watch the </a>VIDEO WALKTHROUGH</a>
 
 ## Installation
 
@@ -21,8 +23,6 @@ Or install it yourself as:
     $ gem install breweries
 
 ## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
