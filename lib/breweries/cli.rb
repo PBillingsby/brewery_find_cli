@@ -11,8 +11,9 @@ class CLI # CONTROLLER
      # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
   end
   def menu
-    puts "Do you wish to list brewery by state or by name? Type 'list', 'name' or 'exit' to exit:"
-    menu_input = gets.chomp
+    puts "Do you wish to list brewery by state or by name?"
+    puts "Type 'list', 'name' or 'exit' to exit:"
+    menu_input = gets.chomp.gsub(/\s+/, "")
     case menu_input
     when 'list'
       list_menu
@@ -33,9 +34,10 @@ class CLI # CONTROLLER
     @found_brewery = []
     @found_brewery << Brewery.all.first
     @found_brewery.collect do |key| 
-      puts "#{key.name} is located in #{key.city}."
+      puts "#{key.name} is located at #{key.street} in #{key.city}, #{key.state}."
       puts "Do you wish to visit the #{key.name} website? Type 'yes' or 'no'"
-      find_web_input = gets.strip
+      puts "To list more breweries in this area, type 'more'"
+      find_web_input = gets.strip.gsub(/\s+/, "")
       
       case find_web_input
       when 'yes'
@@ -46,6 +48,9 @@ class CLI # CONTROLLER
         puts "Taking you to main menu"
         Brewery.all.clear
         start
+      when 'more'
+        BreweryAPI.brewery_by_city(key.city)
+        Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
       else
         puts "Input not recognized. Please try again."
         start
@@ -56,8 +61,6 @@ class CLI # CONTROLLER
   def list_menu
     puts "Type state to see breweries:"
     @list_input = gets.strip.downcase.gsub(/\s+/, "_")
-    # NEXT PAGE VARIABLE TO WORK ON! 
-    # next_page = 'https://api.openbrewerydb.org/breweries?by_state=' + @input + '&page=2'
     correct_state = @@states.select{|state| state == @list_input} 
     if correct_state.empty?
       puts "Please type full state name"
