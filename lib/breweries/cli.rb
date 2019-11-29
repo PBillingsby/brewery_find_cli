@@ -10,23 +10,65 @@ class CLI # CONTROLLER
     menu
      # ADD CONDITIONAL TO SEE IF USER WANTS TO LIST BY STATE OR FIND BY NAME
   end
-  
   def menu
-    puts "Type city to see breweries:"
-    @input = gets.strip.downcase.gsub(/\s+/, "_")
-    # NEXT PAGE VARIABLE TO WORK ON! 
-    # next_page = 'https://api.openbrewerydb.org/breweries?by_state=' + @input + '&page=2'
-    correct_state = @@states.select{|state| state == @input} 
-    if correct_state.empty?
-      puts "Please type full state name"
-      menu
-    else
-      list_or_find
+    puts "Do you wish to list brewery by state or by name? Type 'list', 'name' or 'exit' to exit:"
+    menu_input = gets.chomp
+    case menu_input
+    when 'list'
+      list_menu
+    when 'name'
+      list_name
+    when 'exit'
+      exit
     end
   end
 
-  def list_or_find
-    BreweryAPI.brewery_by_state(@input)
+  def list_name
+    puts "Type brewery name:"
+    @name_input = gets.strip
+    BreweryAPI.brewery_by_name(@name_input)
+    list_brewery_by_name
+  end
+  def list_brewery_by_name  
+    @found_brewery = []
+    @found_brewery << Brewery.all.first
+    @found_brewery.collect do |key| 
+      puts "#{key.name} is located in #{key.city}."
+      puts "Do you wish to visit the #{key.name} website? Type 'yes' or 'no'"
+      find_web_input = gets.strip
+      
+      case find_web_input
+      when 'yes'
+        sleep(0.5)
+        system("open", key.website_url)
+        start
+      when 'no'
+        puts "Taking you to main menu"
+        Brewery.all.clear
+        start
+      else
+        puts "Input not recognized. Please try again."
+        start
+      end
+    end
+  end 
+  
+  def list_menu
+    puts "Type state to see breweries:"
+    @list_input = gets.strip.downcase.gsub(/\s+/, "_")
+    # NEXT PAGE VARIABLE TO WORK ON! 
+    # next_page = 'https://api.openbrewerydb.org/breweries?by_state=' + @input + '&page=2'
+    correct_state = @@states.select{|state| state == @list_input} 
+    if correct_state.empty?
+      puts "Please type full state name"
+      list_menu
+    else
+      list
+    end
+  end
+
+  def list
+    BreweryAPI.brewery_by_state(@list_input)
     list_brewery_names
   end
 
@@ -35,11 +77,25 @@ class CLI # CONTROLLER
     puts "Type number to get more information on brewery, 'exit' to start again"
     list_options = gets.strip.downcase
     brew_input = list_options.to_i
-    brew_selection = Brewery.all[brew_input - 1] # Takes user input to index number minus 1 to account for indexing starting at 0
-    if brew_input.class == Integer && brew_input <= Brewery.all.count - 1
+    brew_selection = Brewery.all[brew_input - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
+    if brew_selection == nil
+      puts "Brewery not in list."
+      puts "Do you wish to try again or return to start? Type 'list' or 'start'"
+      list_or_menu = gets.strip
+      case list_or_menu
+      when 'list'
+        list_brewery_names
+      when 'start'
+        start
+      end
+    elsif list_options == 'exit'
+      start
+    elsif brew_input <= 20
       puts "You have chosen #{brew_selection.name}, a #{brew_selection.brewery_type} located at #{brew_selection.street} in #{brew_selection.city}, #{brew_selection.state}. "
       puts "Do you wish to visit their website? 'y/n'"
       list_web_input = gets.strip
+    else
+      start
     end
 
     if brew_selection.website_url == "" && list_web_input == 'y' # If no link to brewery, restart app
