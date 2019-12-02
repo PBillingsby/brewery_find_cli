@@ -3,7 +3,6 @@ class Brewery
   @@all = []
 
   def initialize(api_hash)
-    # api_hash.each {|k, v| self.send("#{k}=", v)}  ------- Figure this out!
     @name = api_hash["name"]
     @brewery_type = api_hash["brewery_type"]
     @city = api_hash["city"]
@@ -22,3 +21,56 @@ class Brewery
   end
   
 end
+@@states = ["alaska", # Changed states to match @input and remove one line of code
+  "alabama",
+  "arkansas",
+  "arizona",
+  "california",
+  "colorado",
+  "connecticut",
+  "district_of_columbia",
+  "delaware",
+  "florida",
+  "georgia",
+  "guam",
+  "hawaii",
+  "iowa",
+  "idaho",
+  "illinois",
+  "indiana",
+  "kansas",
+  "kentucky",
+  "louisiana",
+  "massachusetts",
+  "maryland",
+  "maine",
+  "michigan",
+  "minnesota",
+  "missouri",
+  "mississippi",
+  "montana",
+  "north_carolina",
+  "north_dakota",
+  "nebraska",
+  "new_hampshire",
+  "new_jersey",
+  "new_mexico",
+  "nevada",
+  "new_york",
+  "ohio",
+  "oklahoma",
+  "oregon",
+  "pennsylvania",
+  "puerto_rico",
+  "rhode_island",
+  "south_carolina",
+  "south_dakota",
+  "tennessee",
+  "texas",
+  "utah",
+  "virginia",
+  "vermont",
+  "washington",
+  "wisconsin",
+  "west_virginia",
+  "wyoming"]
