@@ -104,32 +104,6 @@ class CLI # CONTROLLER
         start
       end
     end
-    # if selected_to_int <= 20 && selected_brewery
-      # puts "#{user_brewery_obj.name}, a #{user_brewery_obj.brewery_type} located at #{user_brewery_obj.street} in #{user_brewery_obj.city}, #{user_brewery_obj.state}. "
-      # puts "Do you wish to visit the #{user_brewery_obj.name} website? 'y/n'"
-      # open_web = gets.strip
-      # if user_brewery_obj.website_url == "" && open_web == 'y' # If no link to brewery, restart app
-      #   puts "No link to brewery website."
-      #   clear_all
-      #   sleep(1)
-      #   start
-      # elsif open_web == 'y'
-      #   puts "Redirecting you now."
-      #   sleep(0.5) # Waits half a second to open link.
-      #   system("open", Brewery.all[selected_to_int - 1].website_url) # Opens external link to selected brewery
-      # elsif open_web == 'exit' || open_web == 'n'
-      #   clear_all
-      #   start
-      # end
-    # elsif selected_brewery == 'exit'
-    #   clear_all
-    #   start
-    # else
-      # puts "Brewery not in list."
-      # puts "Try again."
-      # clear_all
-      # start
-    # end
   end
 
   def clear_all
