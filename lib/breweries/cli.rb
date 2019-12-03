@@ -37,11 +37,11 @@ class CLI # CONTROLLER
       list_brewery_by_name
     else
         @first_brewery.collect do |found_brewery| 
-          puts "BREWERY: \e[0;4;94m#{found_brewery.name}\e[0m."
+          puts "BREWERY: #{found_brewery.name}." # 
           puts "LOCATION: #{found_brewery.street}."
           puts "CITY: #{found_brewery.city}."
           puts "STATE: #{found_brewery.state}."
-          puts "Do you wish to visit the \e[0;4;94m#{found_brewery.name}\e[0m website? Type y/n"
+          puts "Do you wish to visit the #{found_brewery.name} website? Type y/n"
           find_web_input = gets.strip.gsub(/\s+/, "")
           case find_web_input
           when 'y'
@@ -75,18 +75,15 @@ class CLI # CONTROLLER
 
   def list_brewery_names
     BreweryAPI.brewery_by_state(@list_input)
-    # Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name}\n #{brewery.street}, #{brewery.city}, #{brewery.state}.\n"}
-    Brewery.all.each.with_index(1) do |brewery, index|
-      puts "#{index}. \e[0;4;94m#{brewery.name}\e[0m: #{brewery.street}, #{brewery.city}, #{brewery.state}."
-    end
+    Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} - #{brewery.street}, #{brewery.city}, #{brewery.state}."}
     puts "Type number to get more information on brewery, 'exit' to start again"
     selected_brewery = gets.strip.downcase
     selected_to_int = selected_brewery.to_i
     user_brewery_obj = Brewery.all[selected_to_int - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
     
     if selected_to_int <= 20 && selected_brewery != 'exit'
-      puts "\e[0;4;94m#{user_brewery_obj.name}\e[0m, a #{user_brewery_obj.brewery_type} located at #{user_brewery_obj.street} in #{user_brewery_obj.city}, #{user_brewery_obj.state}. "
-      puts "Do you wish to visit the \e[0;4;94m#{user_brewery_obj.name}\e[0m website? 'y/n'"
+      puts "#{user_brewery_obj.name}, a #{user_brewery_obj.brewery_type} located at #{user_brewery_obj.street} in #{user_brewery_obj.city}, #{user_brewery_obj.state}. "
+      puts "Do you wish to visit the #{user_brewery_obj.name} website? 'y/n'"
       open_web = gets.strip
       if user_brewery_obj.website_url == "" && open_web == 'y' # If no link to brewery, restart app
         puts "No link to brewery website. Try again."
