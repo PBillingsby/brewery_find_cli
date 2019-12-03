@@ -2,7 +2,7 @@
 
 BreweryFinder will assist you in finding breweries with delicious beer in every state in the United States.
 
-BreweryFinder will give you the option to list breweries by state, or list brewery by name. In finding a certain brewery you will also have the option to list surrounding breweries in the same city as your chosen one.
+BreweryFinder will give you the option to list breweries by state, or list brewery by name.
 
 For additional information, please watch the [VIDEO WALKTHROUGH LINK](www.google.com)
 

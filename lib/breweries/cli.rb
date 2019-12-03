@@ -31,13 +31,13 @@ class CLI # CONTROLLER
     puts "Type brewery name:"
     @name_input = gets.strip
     BreweryAPI.brewery_by_name(@name_input)
-    @found_brewery = []
-    @found_brewery << Brewery.all.first # Returns first brewery found.
-    if @found_brewery[0] == nil # If brewery not found
+    @first_brewery = []
+    @first_brewery << Brewery.all.first # Returns first brewery found.
+    if @first_brewery[0] == nil # If brewery not found
       puts "Brewery not found. Try again"
       list_brewery_by_name
     else
-        @found_brewery.collect do |key| 
+        @first_brewery.collect do |key| 
           puts "#{key.name} is located at #{key.street} in #{key.city}, #{key.state}."
           puts "Do you wish to visit the #{key.name} website? Type y/n"
           find_web_input = gets.strip.gsub(/\s+/, "")
@@ -48,11 +48,11 @@ class CLI # CONTROLLER
             start
           when 'n'
             puts "Taking you to main menu"
-            Brewery.clear_all
+            clear_all
             start
           else
             puts "Input not recognized. Please try again."
-            Brewery.clear_all
+            clear_all
             start
           end
         end
@@ -75,35 +75,39 @@ class CLI # CONTROLLER
     BreweryAPI.brewery_by_state(@list_input)
     Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} in #{brewery.city}, #{brewery.state}"}
     puts "Type number to get more information on brewery, 'exit' to start again"
-    list_options = gets.strip.downcase
-    int_list_options = list_options.to_i
-    brew_selection = Brewery.all[int_list_options - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
+    selected_brewery = gets.strip.downcase
+    selected_to_int = selected_brewery.to_i
+    user_brewery_obj = Brewery.all[selected_to_int - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
     
-    if int_list_options <= 20 && list_options != 'exit'
-      puts "You have chosen #{brew_selection.name}, a #{brew_selection.brewery_type} located at #{brew_selection.street} in #{brew_selection.city}, #{brew_selection.state}. "
+    if selected_to_int <= 20 && selected_brewery != 'exit'
+      puts "You have chosen #{user_brewery_obj.name}, a #{user_brewery_obj.brewery_type} located at #{user_brewery_obj.street} in #{user_brewery_obj.city}, #{user_brewery_obj.state}. "
       puts "Do you wish to visit their website? 'y/n'"
-      list_web_input = gets.strip
-      if brew_selection.website_url == "" && list_web_input == 'y' # If no link to brewery, restart app
+      open_web = gets.strip
+      if user_brewery_obj.website_url == "" && open_web == 'y' # If no link to brewery, restart app
         puts "No link to brewery website. Try again."
-        Brewery.clear_all
+        clear_all
         sleep(1)
         start
-      elsif list_web_input == 'y'
+      elsif open_web == 'y'
         puts "Redirecting you now."
         sleep(0.5) # Waits half a second to open link.
-        system("open", Brewery.all[brew_input - 1].website_url) # Opens external link to selected brewery
-      elsif list_web_input == 'exit' || list_web_input == 'n'
-        Brewery.clear_all
+        system("open", Brewery.all[selected_to_int - 1].website_url) # Opens external link to selected brewery
+      elsif open_web == 'exit' || open_web == 'n'
+        clear_all
         start
       end
-    elsif list_options == 'exit'
-      Brewery.clear_all
+    elsif selected_brewery == 'exit'
+      clear_all
       start
     else
       puts "Brewery not in list."
       puts "Please try again."
-      Brewery.clear_all
+      clear_all
       start
     end
+  end
+
+  def clear_all
+    Brewery.all.clear
   end
 end
