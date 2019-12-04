@@ -65,7 +65,8 @@ class CLI # CONTROLLER
   def list_menu
     puts "Type state to see breweries:"
     @list_input = gets.strip.downcase.gsub(/\s+/, "_")
-    correct_state = @@states.select{|state| state == @list_input} # Checks if user input state is in @@states array of US states.
+    correct_state = STATES.select{|state| state == @list_input} # Checks if user input state is in @@states array of US states.
+    
     if correct_state.empty?
       puts "Type full state name:"
       list_menu
@@ -109,4 +110,58 @@ class CLI # CONTROLLER
   def clear_all
     Brewery.all.clear
   end
+
+  STATES = ["alaska", # Changed states to match @input and remove one line of code
+  "alabama",
+  "arkansas",
+  "arizona",
+  "california",
+  "colorado",
+  "connecticut",
+  "district_of_columbia",
+  "delaware",
+  "florida",
+  "georgia",
+  "guam",
+  "hawaii",
+  "iowa",
+  "idaho",
+  "illinois",
+  "indiana",
+  "kansas",
+  "kentucky",
+  "louisiana",
+  "massachusetts",
+  "maryland",
+  "maine",
+  "michigan",
+  "minnesota",
+  "missouri",
+  "mississippi",
+  "montana",
+  "north_carolina",
+  "north_dakota",
+  "nebraska",
+  "new_hampshire",
+  "new_jersey",
+  "new_mexico",
+  "nevada",
+  "new_york",
+  "ohio",
+  "oklahoma",
+  "oregon",
+  "pennsylvania",
+  "puerto_rico",
+  "rhode_island",
+  "south_carolina",
+  "south_dakota",
+  "tennessee",
+  "texas",
+  "utah",
+  "virginia",
+  "vermont",
+  "washington",
+  "wisconsin",
+  "west_virginia",
+  "wyoming"]
 end
