@@ -15,10 +15,10 @@ class CLI # CONTROLLER
     puts "Type 'list', 'name' or 'exit' to exit:"
     menu_input = gets.chomp.gsub(/\s+/, "") # Removes whitespace in menu_input
     case menu_input
-    when 'list'
-      list_menu
     when 'name'
       list_brewery_by_name
+    when 'list'
+      list_menu
     when 'exit'
       exit
     else
@@ -29,18 +29,24 @@ class CLI # CONTROLLER
   def list_brewery_by_name  
     puts "Type brewery name:"
     name_input = gets.strip
+    if name_input == 'exit'
+      exit
+    end
     BreweryAPI.brewery_by_name(name_input)
     first_brewery = []
     first_brewery << Brewery.all.first # Returns first brewery found.
     if first_brewery[0] == nil # If brewery not found
       puts "Brewery not found. Try again."
       list_brewery_by_name
+    elsif name_input == 'exit'
+      exit
     else
         first_brewery.collect do |found_brewery| 
           puts "BREWERY: #{found_brewery.name}." # 
           puts "LOCATION: #{found_brewery.street}."
           puts "CITY: #{found_brewery.city}."
           puts "STATE: #{found_brewery.state}."
+          puts "WEBSITE: #{found_brewery.website_url}"
           puts "Do you wish to visit the #{found_brewery.name} website? (Opens external link) Type y/n"
           find_web_input = gets.strip.gsub(/\s+/, "")
           case find_web_input
@@ -53,6 +59,8 @@ class CLI # CONTROLLER
             puts "Taking you to main menu"
             clear_all
             start
+          when 'exit'
+            exit
           else
             puts "Input not recognized. Try again."
             clear_all
@@ -64,9 +72,11 @@ class CLI # CONTROLLER
   
   def list_menu
     puts "Type state to see breweries:"
-    @list_input = gets.strip.downcase.gsub(/\s+/, "_")
-    correct_state = STATES.select{|state| state == @list_input} # Checks if user input state is in @@states array of US states.
-    
+    @list_input = gets.strip.downcase.gsub(/\s+/, "_") # Instance variable to be accessed in list_brewery_names
+    if @list_input == 'exit'
+      exit
+    end
+    correct_state = STATES.select{|state| state == @list_input} # Checks if user input state is in states array of US states.
     if correct_state.empty?
       puts "Type full state name:"
       list_menu
@@ -78,29 +88,35 @@ class CLI # CONTROLLER
   def list_brewery_names
     BreweryAPI.brewery_by_state(@list_input)
     Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} - #{brewery.street}, #{brewery.city}, #{brewery.state}."}
-    puts "Type the number to get more information on brewery, 'exit' to start again"
-    selected_brewery = gets.strip.downcase
-    selected_to_int = selected_brewery.to_i
-    user_brewery_obj = Brewery.all[selected_to_int - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
-    
-    case 
-    when selected_brewery == 'exit'
+    puts "Type the number to get more information on brewery."
+    selected_brewery = gets.chomp
+    user_brewery_obj = Brewery.all[selected_brewery.to_i - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
+    if selected_brewery == 'exit'
+      exit
+    elsif selected_brewery.to_i <= 0 || selected_brewery.to_i >= Brewery.all.count
+      puts "Brewery not found."
       clear_all
       start
-    when selected_to_int <= 20
-      puts "#{user_brewery_obj.name}, a #{user_brewery_obj.brewery_type} located at #{user_brewery_obj.street} in #{user_brewery_obj.city}, #{user_brewery_obj.state}. "
-      puts "Do you wish to visit the #{user_brewery_obj.name} website? 'y/n'"
+    elsif selected_brewery.to_i <= 20 
+      puts "BREWERY: #{user_brewery_obj.name}." # 
+      puts "LOCATION: #{user_brewery_obj.street}."
+      puts "CITY: #{user_brewery_obj.city}."
+      puts "STATE: #{user_brewery_obj.state}."
+      puts "WEBSITE: #{user_brewery_obj.website_url}."
+      puts "Do you wish to visit the #{user_brewery_obj.name} website? (Opens external link) Type y/n"
       open_web = gets.strip
       if user_brewery_obj.website_url == "" && open_web == 'y' # If no link to brewery, restart app
         puts "No link to brewery website."
         clear_all
         sleep(1)
         start
+      elsif open_web == 'exit'
+        exit
       elsif open_web == 'y'
         puts "Redirecting you now."
         sleep(0.5) # Waits half a second to open link.
         system("open", Brewery.all[selected_to_int - 1].website_url) # Opens external link to selected brewery
-      elsif open_web == 'exit' || open_web == 'n'
+      elsif open_web == 'n'
         clear_all
         start
       end
@@ -111,7 +127,7 @@ class CLI # CONTROLLER
     Brewery.all.clear
   end
 
-  STATES = ["alaska", # Changed states to match @input and remove one line of code
+  STATES = ["alaska", # Changed states to match input and remove one line of code
   "alabama",
   "arkansas",
   "arizona",
