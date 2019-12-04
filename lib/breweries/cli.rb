@@ -42,7 +42,7 @@ class CLI # CONTROLLER
       exit
     else
         first_brewery.collect do |found_brewery| 
-          puts "BREWERY: #{found_brewery.name}." # 
+          puts "BREWERY: #{found_brewery.name}."  
           puts "LOCATION: #{found_brewery.street}."
           puts "CITY: #{found_brewery.city}."
           puts "STATE: #{found_brewery.state}."
@@ -91,13 +91,14 @@ class CLI # CONTROLLER
     puts "Type the number to get more information on brewery."
     selected_brewery = gets.chomp
     user_brewery_obj = Brewery.all[selected_brewery.to_i - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
+    binding.pry
     if selected_brewery == 'exit'
       exit
-    elsif selected_brewery.to_i <= 0 || selected_brewery.to_i >= Brewery.all.count
+    elsif selected_brewery.to_i > Brewery.all.count || selected_brewery[0] == '-' # Accounts for selected_brewery selection being greater than Brewery count and also accounts for '-' minus input
       puts "Brewery not found."
       clear_all
       start
-    elsif selected_brewery.to_i <= 20 
+    elsif selected_brewery.to_i <= Brewery.all.count 
       puts "BREWERY: #{user_brewery_obj.name}." # 
       puts "LOCATION: #{user_brewery_obj.street}."
       puts "CITY: #{user_brewery_obj.city}."
