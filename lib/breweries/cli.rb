@@ -13,7 +13,7 @@ class CLI # CONTROLLER
   def menu
     puts "Do you wish to list brewery by state or by name?"
     puts "Type 'list', 'name' or 'exit' to exit:"
-    menu_input = gets.chomp.gsub(/\s+/, "")
+    menu_input = gets.chomp.gsub(/\s+/, "") # Removes whitespace in menu_input
     case menu_input
     when 'list'
       list_menu

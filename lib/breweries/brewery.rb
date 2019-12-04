@@ -15,10 +15,6 @@ class Brewery
   def self.all
     @@all
   end
-
-  # def self.clear_all
-  #   @@all.clear
-  # end
   
 end
 @@states = ["alaska", # Changed states to match @input and remove one line of code
