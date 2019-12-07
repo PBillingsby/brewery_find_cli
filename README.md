@@ -8,7 +8,7 @@ For additional information, please watch the [VIDEO WALKTHROUGH LINK](www.google
 
 ## Installation
 
-Clone down repo 
+Clone down repo <br>
 SSH: git@github.com:PBillingsby/brewery_find_cli.git<br>
 HTTPS: https://github.com/PBillingsby/brewery_find_cli.git
 
