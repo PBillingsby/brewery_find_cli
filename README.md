@@ -19,7 +19,11 @@ Run ```bundle install```
 Once installed run ```bin/breweries```
 
 ## Usage
+To list a brewery by state, type 'list' at startup.
+For individual brewery type 'name'
 
+Listing by state will give you 20 options from the API first page.
+Finding by name will use the API to find the inputted brewery with as much accuracy as it will allow.
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
