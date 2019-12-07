@@ -91,7 +91,6 @@ class CLI # CONTROLLER
     puts "Type the number to get more information on brewery."
     selected_brewery = gets.chomp
     user_brewery_obj = Brewery.all[selected_brewery.to_i - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
-    binding.pry
     if selected_brewery == 'exit'
       exit
     elsif selected_brewery.to_i > Brewery.all.count || selected_brewery[0] == '-' # Accounts for selected_brewery selection being greater than Brewery count and also accounts for '-' minus input
