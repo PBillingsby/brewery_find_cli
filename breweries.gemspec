@@ -8,15 +8,15 @@ Gem::Specification.new do |spec|
   spec.authors       = ["PBillingsby"]
   spec.email         = ["philbillingsby@gmail.com"]
 
-  spec.summary       = %q{TODO: Gem for finding information on breweries in the United States}
-  spec.homepage      = "https://github.com/PBillingsby/brewery_find_cli.git"
+  spec.summary       = %q{Gem for finding information on breweries in the United States}
+  spec.homepage      = "https://github.com/PBillingsby/cli-data-gem-assessment-online-web-pt-100719.git"
   spec.license       = "MIT"
 
   spec.metadata["allowed_push_host"] = "http://mygemserver.com"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/PBillingsby/cli-data-gem-assessment-online-web-pt-100719.git"
-  spec.metadata["changelog_uri"] = "https://github.com/PBillingsby/cli-data-gem-assessment-online-web-pt-100719/commits/master/lib"
+  # spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
+  # spec.metadata["changelog_uri"] = "TODO: Put your gem's CHANGELOG.md URL here."
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
