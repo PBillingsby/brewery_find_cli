@@ -9,8 +9,8 @@ For additional information, please watch the [VIDEO WALKTHROUGH LINK](www.google
 ## Installation
 
 Clone down repo 
-SSH: 'git@github.com:PBillingsby/brewery_find_cli.git'
-HTTPS: 'https://github.com/PBillingsby/brewery_find_cli.git'
+SSH: git@github.com:PBillingsby/brewery_find_cli.git<br>
+HTTPS: https://github.com/PBillingsby/brewery_find_cli.git
 
 Change directory into 'brewery_find_cli' folder.
 
