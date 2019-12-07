@@ -14,11 +14,9 @@ HTTPS: https://github.com/PBillingsby/brewery_find_cli.git
 
 Change directory into 'brewery_find_cli' folder.
 
-Run ```ruby
-bundle install```
+Run ```bundle install```
 
-Once installed run ```ruby 
-bin/breweries```
+Once installed run ```bin/breweries```
 
 ## Usage
 
