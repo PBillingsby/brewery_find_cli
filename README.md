@@ -8,19 +8,17 @@ For additional information, please watch the [VIDEO WALKTHROUGH LINK](www.google
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Clone down repo 
+SSH: 'git@github.com:PBillingsby/brewery_find_cli.git'
+HTTPS: 'https://github.com/PBillingsby/brewery_find_cli.git'
 
-```ruby
-gem 'breweries'
-```
+Change directory into 'brewery_find_cli' folder.
 
-And then execute:
+Run ```ruby
+bundle install```
 
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install breweries
+Once installed run ```ruby 
+bin/breweries```
 
 ## Usage
 
