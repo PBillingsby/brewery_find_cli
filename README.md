@@ -1,8 +1,8 @@
 # Breweries
 
-BreweryFinder will assist you in finding breweries with delicious beer in every state in the United States.
+Brewery Find CLI will assist you in finding breweries with delicious beer in every state in the United States.
 
-BreweryFinder will give you the option to list breweries by state, or list brewery by name.
+Brewery Find CLI will give you the option to list breweries by state, or list brewery by name.
 
 For additional information, please watch the [VIDEO WALKTHROUGH LINK](www.google.com)
 
