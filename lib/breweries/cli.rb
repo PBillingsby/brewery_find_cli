@@ -116,7 +116,9 @@ class CLI # CONTROLLER
       elsif open_web == 'y'
         puts "Redirecting you now."
         sleep(0.5) # Waits half a second to open link.
-        system("open", Brewery.all[selected_to_int - 1].website_url) # Opens external link to selected brewery
+        system("open", Brewery.all[selected_brewery.to_i - 1].website_url) # Opens external link to selected brewery
+        clear_all
+        start
       elsif open_web == 'n'
         clear_all
         start
