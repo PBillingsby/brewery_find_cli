@@ -12,7 +12,7 @@ class CLI # CONTROLLER
   # Menu gives options to either search by state, by name, or to exit program.
   def menu
     puts "Do you wish to list brewery by state or by name?"
-    puts "Type 'list', 'name'"
+    puts "Type 'list' or 'name'"
     puts "Type 'exit' at any time to exit."
     menu_input = gets.chomp.gsub(/\s+/, "") # Removes whitespace in menu_input
     case menu_input
