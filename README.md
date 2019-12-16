@@ -4,7 +4,7 @@ Brewery Find CLI will assist you in finding breweries with delicious beer in eve
 
 Brewery Find CLI will give you the option to list breweries by state, or list brewery by name.
 
-For additional information, please watch the [VIDEO WALKTHROUGH LINK](www.google.com)
+For additional information, please watch the [VIDEO WALKTHROUGH LINK](https://drive.google.com/file/d/1TJaPgkRmHJJNtWalLuC8OprG6Uv0bBlJ/view?usp=sharing)
 
 ## Installation
 
