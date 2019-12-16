@@ -2,9 +2,9 @@ class CLI # CONTROLLER
  
   def start
     puts " -----------------------"
-    puts "|     ** WELCOME **     |"
-    puts "|                       |"
-    puts "| TO THE BREWERY FINDER |"
+    puts "|      * WELCOME *      |"
+    puts "|        TO THE         |"
+    puts "|    BREWERY FINDER     |"
     puts " ----------------------- "
     menu
   end
@@ -73,7 +73,7 @@ class CLI # CONTROLLER
   
   def list_menu
     puts "Type state to see breweries:"
-    @list_input = gets.strip.downcase.gsub(/\s+/, "_") # Instance variable to be accessed in list_brewery_names
+    @list_input = gets.strip.downcase .gsub(/\s+/, "_") # Instance variable to be accessed in list_brewery_names
     if @list_input == 'exit'
       exit
     end
