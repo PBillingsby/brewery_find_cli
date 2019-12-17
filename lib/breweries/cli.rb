@@ -10,15 +10,15 @@ class CLI # CONTROLLER
   end
   
   # Menu gives options to either search by state, by name, or to exit program.
-  def menu
+  def menu # Instance method (Instance of CLI)
     puts "Do you wish to list brewery by state or by name?"
-    puts "Type 'list' or 'name'"
+    puts "Type 'state' or 'name'"
     puts "Type 'exit' at any time to exit."
     menu_input = gets.chomp.gsub(/\s+/, "") # Removes whitespace in menu_input
     case menu_input
     when 'name'
       list_brewery_by_name
-    when 'list'
+    when 'state'
       list_menu
     when 'exit'
       exit
@@ -86,7 +86,7 @@ class CLI # CONTROLLER
     end
   end
 
-  def list_brewery_names
+  def list_brewery_names # Lists by state
     BreweryAPI.brewery_by_state(@list_input)
     Brewery.all.each.with_index(1) {|brewery, index| puts "#{index}. #{brewery.name} - #{brewery.street}, #{brewery.city}, #{brewery.state}."}
     puts "Type the number to get more information on brewery."

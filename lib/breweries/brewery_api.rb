@@ -1,11 +1,10 @@
 require 'pry'
 class BreweryAPI
   
-  def self.brewery_by_state(user_input) # Browse breweries by US states.
+  def self.brewery_by_state(user_input) # Browse breweries by US states. BreweryAPI class method
     brew_input = user_input.downcase.gsub(/\s+/, "_") # Gets, downcases and removes space in user input
     brew_link = 'https://api.openbrewerydb.org/breweries?by_state=' + brew_input # Concatenates user input brewery to end link
     response = HTTParty.get(brew_link)
-    binding.pry
     response.each do |hash|
       Brewery.new(hash)
     end

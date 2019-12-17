@@ -12,7 +12,7 @@ class Brewery
     @@all << self
   end
 
-  def self.all
+  def self.all # Brewery.all class method
     @@all
   end
   
