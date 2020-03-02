@@ -94,7 +94,7 @@ class CLI # CONTROLLER
     unless selected_brewery.to_s =~ /[0-9]+/ || selected_brewery == 'exit'
       puts "Brewery not found."
       clear_all
-      start
+      list_brewery_names
     end
     user_brewery_obj = Brewery.all[selected_brewery.to_i - 1] # Takes user input to index number minus 1 to account for indexing starting at 0 
     if selected_brewery == 'exit'
@@ -102,7 +102,7 @@ class CLI # CONTROLLER
     elsif selected_brewery.to_i > Brewery.all.count || selected_brewery[0] == '-' # Accounts for selected_brewery selection being greater than Brewery count and also accounts for '-' minus input
       puts "Brewery not found."
       clear_all
-      start
+      list_brewery_names
     elsif selected_brewery.to_i <= Brewery.all.count 
       puts "BREWERY: #{user_brewery_obj.name}." # 
       puts "LOCATION: #{user_brewery_obj.street}."

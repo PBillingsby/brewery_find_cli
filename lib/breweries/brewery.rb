@@ -3,6 +3,7 @@ class Brewery
   @@all = []
 
   def initialize(api_hash)
+    apple = "apple"
     @name = api_hash["name"]
     @brewery_type = api_hash["brewery_type"]
     @city = api_hash["city"]
